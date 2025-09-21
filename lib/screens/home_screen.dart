@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.75,
+                          childAspectRatio: 1.1,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
                         ),
@@ -249,6 +249,8 @@ class FeaturedItemCard extends StatelessWidget {
   }
 }
 
+// Update the GridView.builder in your HomeScreen to use this aspect ratio:
+// childAspectRatio: 0.8, // Change from 1.1 to 0.8 to make cards taller
 
 class PopularRentalCard extends StatelessWidget {
   final Product product;
@@ -267,8 +269,6 @@ class PopularRentalCard extends StatelessWidget {
         );
       },
       child: Container(
-        height: 173,
-        width: 173,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           //color: Colors.grey[100],
@@ -276,49 +276,63 @@ class PopularRentalCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 170,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                color: Color(0xFF2E5266),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                child: Image.asset(
-                  product.imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Center(
-                      child: _getProductIcon(product.name),
-                    );
-                  },
+            Expanded(
+              flex: 7,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                  color: Color(0xFF2E5266),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                  child: Image.asset(
+                    product.imageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Center(
+                        child: _getProductIcon(product.name),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.name,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        product.name,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    product.description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
+                    SizedBox(height: 2),
+                    Flexible(
+                      child: Text(
+                        product.description,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey[600],
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
