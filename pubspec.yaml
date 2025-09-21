@@ -1,0 +1,39 @@
+name: rental_app
+description: RentHub - A Flutter e-commerce rental application
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1          # ← ADD THIS LINE
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/assets/Bose_Headphones.png
+    - lib/assets/Canon Camera.png
+    - lib/assets/DJI Drone.png
+    - lib/assets/Smart Kitchen Set.png
+    - lib/assets/Tech Bundle.png
+    - lib/assets/rent_hub_icon.png
+
+flutter_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: "lib/assets/rent_hub_icon.png"
+  image_path: "lib/assets/rent_hub_icon.png"
